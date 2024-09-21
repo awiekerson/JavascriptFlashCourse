@@ -19,7 +19,7 @@ const weatherCondition = "sunny";
 const userLocation = "Seattle";
 let temperature = 30;
 let celsiusText = `The weather is ${weatherCondition} in ${userLocation} and it's ${temperature.toFixed(1)}°C outside.`;
-let fahrText = `The weather is ${weatherCondition} in ${userLocation} and it's ${((temperature * (9/5)) + 32).toFixed(1)}°F outside.`;
+let fahrText = `The weather is ${weatherCondition} in ${userLocation} and it's ${celsiusToFahr(temperature).toFixed(1)}°F outside.`;
 
 document.querySelector('#weather').innerHTML = celsiusText; 
 
@@ -43,5 +43,6 @@ document.querySelector('div.weather-group').addEventListener('click', function(e
    
 });
 
-
-
+function celsiusToFahr (temperature) {
+   return (temperature * (9/5)) + 32;
+}
