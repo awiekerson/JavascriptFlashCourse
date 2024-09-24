@@ -102,19 +102,19 @@ galleryImages.forEach(function(image, index) {
     thumb.src = image.src;
     thumb.alt = image.alt;
     thumb.dataset.arrayIndex = index;
-    (thumb.dataset.selected = index === 0? true: false)
+    (thumb.dataset.selected = index === 0? true : false);
 
-    thumb.addEventListener("click", function(event){
+    thumb.addEventListener("click", function(event) {
         let selectedImageIndex = event.target.dataset.arrayIndex;
-        mainImage.src = galleryImages[selectedImageIndex].src;  
-        mainImage.alt = galleryImages[selectedImageIndex].alt; 
+        mainImage.src = galleryImages[selectedImageIndex].src;
+        mainImage.alt = galleryImages[selectedImageIndex].alt;
+   
 
-        thumbnails.querySelectorAll("img").forEach(function(img){
-            img.dataset.selected = false;
-        });
+    thumbnails.querySelectorAll("img").forEach(function(img) {
+        img.dataset.selected = false;
+    }) 
 
-        event.target.dataset.selected = true;
-    });
-
+    event.target.dataset.selected = true;
+})
     thumbnails.appendChild(thumb);
-}); 
+});
