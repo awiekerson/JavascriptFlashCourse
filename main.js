@@ -196,6 +196,7 @@ function galleryHandler(){
 
 }
 
+
 function populateProducts(productList) {
 
     let productsSection = document.querySelector(".products-area");
