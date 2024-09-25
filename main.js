@@ -1,6 +1,11 @@
 
 // Constant Variables
 
+const weatherAPIKey = "53a111e3396c08e52015697c783882d4";
+const weatherAPIURL = `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units=metric`
+
+
+
 const galleryImages = [
         
         
@@ -79,12 +84,6 @@ function greetingHandler(){
 
     const currentHour = new Date().getHours();
     let greetingText;
-    const weatherCondition = "sunny";
-    const userLocation = "Seattle";
-    let temperature = 30;
-    let celsiusText = `The weather is ${weatherCondition} in ${userLocation} and it's ${temperature.toFixed(1)}°C outside.`;
-    let fahrText = `The weather is ${weatherCondition} in ${userLocation} and it's ${celsiusToFahr(temperature).toFixed(1)}°F outside.`;
-
 
     if (currentHour < 12) {
         greetingText = "Good Morning!"
@@ -96,20 +95,53 @@ function greetingHandler(){
         greetingText = "Welcome!";
     }
     document.querySelector('#greeting').innerHTML = greetingText; 
-    document.querySelector('#weather').innerHTML = celsiusText; 
-
-    document.querySelector('div.weather-group').addEventListener('click', function(event){
-        
-    if (event.target.id == 'fahr'){
-            document.querySelector('#weather').innerHTML = fahrText;  
-    }
-    if (event.target.id == 'celsius'){
-            document.querySelector('#weather').innerHTML = celsiusText;
-    }
    
-});
 
 }
+
+//Weather
+
+function weatherHandler(){
+
+    navigator.geolocation.getCurrentPosition(position => {
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+        let url = weatherAPIURL
+            .replace("{lat}",latitude)
+            .replace("{lon}", longitude)
+            .replace("{API key}", weatherAPIKey)
+        fetch(url)
+        .then(response => 
+            response.json())
+        .then(data => {
+            const condition = data.weather[0].description;
+            const location = data.name;
+            let temperature = data.main.temp;
+    
+                let celsiusText = `A ${condition} in ${location} and it's ${temperature.toFixed(1)}°C outside.`;
+                let fahrText = `A ${condition} in ${location} and it's ${celsiusToFahr(temperature).toFixed(1)}°F outside.`;
+            
+                document.querySelector('#weather').innerHTML = celsiusText; 
+            
+                document.querySelector('div.weather-group').addEventListener('click', function(event){
+                    
+                if (event.target.id == 'fahr'){
+                        document.querySelector('#weather').innerHTML = fahrText;  
+                }
+                if (event.target.id == 'celsius'){
+                        document.querySelector('#weather').innerHTML = celsiusText;
+                }
+            
+             });
+        }).catch((err => {
+            document.querySelector('#weather').innerHTML = "Unable to get weather information. Try again later. ";  
+        }));
+        //can also replace with try{}catch{} block
+            //Json is javascript object notation conversion
+    });
+    
+    }
+
 
 // Can set the time in which something repeats
 //setTimeout only repeats once
@@ -220,13 +252,9 @@ function productsHandler() {
 
 
 
-    let freeProducts = products.filter(function(item){
-        return item.price <= 0 || !item.price || item.price === undefined;
-    });
+    let freeProducts = products.filter(item => item.price <= 0 || !item.price || item.price === undefined);
 
-    let paidProducts = products.filter(function(item){
-        return item.price > 0;
-    });
+    let paidProducts = products.filter(item => item.price > 0);
 
     populateProducts(products);
 
@@ -256,10 +284,12 @@ function footHandler() {
 }
 
 
+
 //page load
 
 menuHandler('button#open-nav-menu');
 menuHandler('button#close-nav-menu');
+weatherHandler();
 greetingHandler();
 clockHandler();
 galleryHandler();
