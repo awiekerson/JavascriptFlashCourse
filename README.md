@@ -1,6 +1,6 @@
 <b> Javascript Flash Course Website </b>
 
-I developed an interactive website based on a static HTML and CSS design that I found online. To enhance the user experience, I incorporated features that greet users differently depending on the time of day. Additionally, I sent an HTTP request to the <a href="https://openweathermap.org/current"> Current Weather Data API</a> from <a href="https://openweathermap.org/">OpenWeather.org</a> and formatted the data using JSON to retrieve the user's location and display current weather conditions, including temperature conversion between Celsius and Fahrenheit.
+I developed an interactive website based on a static HTML and CSS design that I found online. To enhance the user experience, I incorporated features that greet users differently depending on the time of day. Additionally, I sent an HTTP request to the <a href="https://openweathermap.org/current"> Current Weather Data API</a> from <a href="https://openweathermap.org/">OpenWeather.org</a> and formatted the data using JSON to retrieve the user's location and use this data to display the current weather conditions, including a temperature conversion between Celsius and Fahrenheit.
 
 Additionally, I implemented a dynamic hero section that allows users to select their desired image for display. I structured this feature so that main image objects can be easily added or removed from an array, automatically updating the available image choices for the user.
 
