@@ -6,6 +6,6 @@ Additionally, I implemented a dynamic hero section that allows users to select t
 
 In the product section, I created a dynamic product listing that enables users to filter products by price. This feature is also structured so that adding or removing product objects from an array automatically updates the displayed products and their information.
 
-Check out the finalized website here: <a href=""Javascript Flash Course>
+Check out the finalized website here: <a href="">Javascript Flash Course</a>
 
 
